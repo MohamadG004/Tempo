@@ -81,7 +81,7 @@ export function CalendarHeader({ currentDate, view, onViewChange, onNavigate, on
         </div>
 
         <Button size="sm" onClick={onAddEvent} className="gradient-primary text-primary-foreground">
-          <Plus className="h-4 w-4 mr-1" />
+          <Plus className="h-4 w-4" />
           Event
         </Button>
 
