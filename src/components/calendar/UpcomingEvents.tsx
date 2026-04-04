@@ -37,7 +37,7 @@ export function UpcomingEvents({ events, onEventClick }: UpcomingEventsProps) {
                 <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors">{event.title}</p>
                 <p className="text-[10px] text-muted-foreground">
                   {dayjs(event.date).format("MMM D")}
-                  {event.startTime && ` · ${event.startTime}`}
+                  {event.startTime && ` · ${dayjs(`2000-01-01 ${event.startTime}`).format("h:mm A")}`}
                 </p>
               </div>
             </button>
