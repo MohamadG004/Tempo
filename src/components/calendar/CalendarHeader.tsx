@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight, Plus, Calendar as CalendarIcon, LogOut, User } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import type { CalendarView } from "@/types/calendar";
 import { useAuth } from "@/contexts/AuthContext";
@@ -33,6 +33,12 @@ function getTitle(date: dayjs.Dayjs, view: CalendarView): string {
 
 export function CalendarHeader({ currentDate, view, onViewChange, onNavigate, onToday, onAddEvent }: CalendarHeaderProps) {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/"); // redirect to home page after logout
+  };
 
   return (
     <header className="flex items-center justify-between px-4 py-3 bg-card border-b border-border">
@@ -80,7 +86,7 @@ export function CalendarHeader({ currentDate, view, onViewChange, onNavigate, on
         </Button>
 
         {user ? (
-          <Button variant="ghost" size="icon" onClick={logout} className="h-8 w-8">
+          <Button variant="ghost" size="icon" onClick={handleLogout} className="h-8 w-8">
             <LogOut className="h-4 w-4" />
           </Button>
         ) : (
