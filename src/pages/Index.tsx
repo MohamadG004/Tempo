@@ -29,7 +29,7 @@ const Index = () => {
         </span>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground leading-tight max-w-3xl">
           Your time,{" "}
-          <span className="gradient-primary bg-clip-text text-transparent">beautifully</span>{" "}
+          <span className="gradient-primary bg-clip-text text-transparent [-webkit-background-clip:text]">beautifully</span>{" "}
           organized
         </h1>
         <p className="mt-4 text-muted-foreground max-w-xl text-lg">
@@ -60,7 +60,7 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="border-t border-border py-6 text-center text-xs text-muted-foreground">
-        Tempo — Your time, beautifully organized
+        &copy; {new Date().getFullYear()} Mohamad Ghattas.
       </footer>
     </div>
   );
