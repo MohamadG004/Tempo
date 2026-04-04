@@ -19,23 +19,47 @@ function saveLocalEvents(events: CalendarEvent[]) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
 }
 
-function isRecurrenceMatch(event: CalendarEvent, dateKey: string): boolean {
-  const eventDate = dayjs(event.date);
-  const target = dayjs(dateKey);
-  if (target.isBefore(eventDate, "day")) return false;
+function isEventOnDate(event: CalendarEvent, dateKey: string): boolean {
+  const targetDate = dayjs(dateKey);
+  const startDate = dayjs(event.date);
+  const endDate = dayjs(event.endDate || event.date);
 
-  switch (event.recurrence) {
-    case "daily":
-      return true;
-    case "weekly":
-      return eventDate.day() === target.day();
-    case "monthly":
-      return eventDate.date() === target.date();
-    case "yearly":
-      return eventDate.month() === target.month() && eventDate.date() === target.date();
-    default:
-      return event.date === dateKey;
+  if (!targetDate.isBefore(startDate, "day") && !targetDate.isAfter(endDate, "day")) {
+    return true;
   }
+
+  if (event.recurrence === "none" || targetDate.isBefore(startDate, "day")) {
+    return false;
+  }
+
+  if (event.recurrenceEndDate) {
+    const recEndDate = dayjs(event.recurrenceEndDate);
+    if (targetDate.isAfter(recEndDate, "day")) {
+      return false;
+    }
+  }
+
+  const durationInDays = endDate.diff(startDate, "day");
+
+  for (let i = 0; i <= durationInDays; i++) {
+    const checkDate = targetDate.subtract(i, "day");
+    
+    switch (event.recurrence) {
+      case "daily":
+        return true; 
+      case "weekly":
+        if (checkDate.day() === startDate.day()) return true;
+        break;
+      case "monthly":
+        if (checkDate.date() === startDate.date()) return true;
+        break;
+      case "yearly":
+        if (checkDate.month() === startDate.month() && checkDate.date() === startDate.date()) return true;
+        break;
+    }
+  }
+
+  return false;
 }
 
 export function useCalendarStore() {
@@ -132,7 +156,7 @@ export function useCalendarStore() {
 
   const getEventsForDate = useCallback(
     (dateKey: string): CalendarEvent[] => {
-      return events.filter((e) => isRecurrenceMatch(e, dateKey));
+      return events.filter((e) => isEventOnDate(e, dateKey));
     },
     [events]
   );

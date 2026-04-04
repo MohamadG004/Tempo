@@ -1,20 +1,20 @@
 import dayjs from "dayjs";
 
 export type CalendarView = "month" | "week" | "day";
-
 export type EventColor = "purple" | "green" | "amber" | "rose" | "sky";
-
 export type RecurrenceType = "none" | "daily" | "weekly" | "monthly" | "yearly";
 
 export interface CalendarEvent {
   id: string;
   title: string;
-  date: string; // YYYY-MM-DD
+  date: string; // Start date (YYYY-MM-DD)
+  endDate?: string; // End date (YYYY-MM-DD) for multi-day events
   startTime?: string; // HH:mm
   endTime?: string; // HH:mm
   color: EventColor;
   description?: string;
   recurrence: RecurrenceType;
+  recurrenceEndDate?: string; // Until when the event repeats
 }
 
 export interface DayInfo {

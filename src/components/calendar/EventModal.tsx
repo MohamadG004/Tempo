@@ -1,3 +1,4 @@
+// components/calendar/EventModal.tsx
 import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -5,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Trash2, Repeat } from "lucide-react";
+import { Trash2, Repeat, AlertCircle } from "lucide-react";
 import type { CalendarEvent, EventColor, RecurrenceType } from "@/types/calendar";
 import { EVENT_COLORS, getEventColorClass } from "@/types/calendar";
 
@@ -30,44 +31,70 @@ const RECURRENCE_OPTIONS: { value: RecurrenceType; label: string }[] = [
 export function EventModal({ open, onClose, onSave, onUpdate, onDelete, editEvent, defaultDate }: EventModalProps) {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [color, setColor] = useState<EventColor>("purple");
   const [description, setDescription] = useState("");
   const [recurrence, setRecurrence] = useState<RecurrenceType>("none");
+  const [recurrenceEndDate, setRecurrenceEndDate] = useState("");
+  
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (editEvent) {
       setTitle(editEvent.title);
       setDate(editEvent.date);
+      setEndDate(editEvent.endDate || editEvent.date);
       setStartTime(editEvent.startTime || "");
       setEndTime(editEvent.endTime || "");
       setColor(editEvent.color);
       setDescription(editEvent.description || "");
       setRecurrence(editEvent.recurrence);
+      setRecurrenceEndDate(editEvent.recurrenceEndDate || "");
     } else {
       setTitle("");
       setDate(defaultDate || "");
+      setEndDate(defaultDate || "");
       setStartTime("");
       setEndTime("");
       setColor("purple");
       setDescription("");
       setRecurrence("none");
+      setRecurrenceEndDate("");
     }
+    setError(""); 
   }, [editEvent, defaultDate, open]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim() || !date) return;
+    
+    // Field Validation
+    if (!title.trim() || !date || !endDate || !startTime || !endTime) {
+      setError("Please fill out all required fields (Title, Dates, and Times).");
+      return;
+    }
+    
+    if (recurrence !== "none" && !recurrenceEndDate) {
+      setError("Please specify an 'Until' date for your repeating event.");
+      return;
+    }
+
+    if (date > endDate) {
+      setError("End date cannot be before start date.");
+      return;
+    }
 
     const eventData = {
       title: title.trim(),
       date,
-      startTime: startTime || undefined,
-      endTime: endTime || undefined,
+      endDate,
+      startTime,
+      endTime,
       color,
       description: description.trim() || undefined,
       recurrence,
+      recurrenceEndDate: recurrence !== "none" ? recurrenceEndDate : undefined,
     };
 
     if (editEvent && onUpdate) {
@@ -85,27 +112,52 @@ export function EventModal({ open, onClose, onSave, onUpdate, onDelete, editEven
           <DialogTitle>{editEvent ? "Edit Event" : "New Event"}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
+          
+          {error && (
+            <div className="flex items-center gap-2 text-sm text-destructive bg-destructive/10 p-2 rounded">
+              <AlertCircle className="h-4 w-4" />
+              <span>{error}</span>
+            </div>
+          )}
+
           <div>
             <Label>Title</Label>
             <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Event name" autoFocus />
           </div>
-          <div className="grid grid-cols-3 gap-2">
+          
+          <div className="grid grid-cols-2 gap-2">
             <div>
-              <Label>Date</Label>
+              <Label>Start Date</Label>
               <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
             </div>
             <div>
-              <Label>Start</Label>
-              <Input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
+              <Label>End Date</Label>
+              <Input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+            </div>
+          </div>
+
+          {/* Reverted back to standard type="time" for better control */}
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <Label>Start Time</Label>
+              <Input 
+                type="time" 
+                value={startTime} 
+                onChange={(e) => setStartTime(e.target.value)}
+              />
             </div>
             <div>
-              <Label>End</Label>
-              <Input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
+              <Label>End Time</Label>
+              <Input 
+                type="time" 
+                value={endTime} 
+                onChange={(e) => setEndTime(e.target.value)}
+              />
             </div>
           </div>
 
           <div>
-            <Label>Color</Label>
+            <Label>Category</Label>
             <div className="flex gap-2 mt-1">
               {EVENT_COLORS.map((c) => (
                 <button
@@ -120,21 +172,30 @@ export function EventModal({ open, onClose, onSave, onUpdate, onDelete, editEven
             </div>
           </div>
 
-          <div>
-            <Label>Repeat</Label>
-            <Select value={recurrence} onValueChange={(v) => setRecurrence(v as RecurrenceType)}>
-              <SelectTrigger>
-                <Repeat className="h-3 w-3 mr-1" />
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {RECURRENCE_OPTIONS.map((o) => (
-                  <SelectItem key={o.value} value={o.value}>
-                    {o.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <Label>Repeat</Label>
+              <Select value={recurrence} onValueChange={(v) => setRecurrence(v as RecurrenceType)}>
+                <SelectTrigger>
+                  <Repeat className="h-3 w-3 mr-1" />
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {RECURRENCE_OPTIONS.map((o) => (
+                    <SelectItem key={o.value} value={o.value}>
+                      {o.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            
+            {recurrence !== "none" && (
+              <div>
+                <Label>Repeat Until</Label>
+                <Input type="date" value={recurrenceEndDate} onChange={(e) => setRecurrenceEndDate(e.target.value)} />
+              </div>
+            )}
           </div>
 
           <div>
@@ -142,7 +203,7 @@ export function EventModal({ open, onClose, onSave, onUpdate, onDelete, editEven
             <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Optional notes..." rows={2} />
           </div>
 
-          <div className="flex justify-between">
+          <div className="flex justify-between mt-6">
             {editEvent && onDelete ? (
               <Button type="button" variant="destructive" size="sm" onClick={() => { onDelete(editEvent.id); onClose(); }}>
                 <Trash2 className="h-4 w-4 mr-1" /> Delete
