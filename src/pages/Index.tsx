@@ -47,7 +47,7 @@ const Index = () => {
       <section className="max-w-4xl mx-auto px-4 pb-20 grid md:grid-cols-3 gap-6">
         {[
           { icon: LayoutGrid, title: "Multiple Views", desc: "Switch between month, week, and day views seamlessly" },
-          { icon: Repeat, title: "Recurring Events", desc: "Daily, weekly, monthly, or yearly — set it and forget it" },
+          { icon: Repeat, title: "Recurring Events", desc: "Daily, weekly, monthly, or yearly, set it and forget it" },
           { icon: Sparkles, title: "Beautiful Design", desc: "Clean, modern interface with color-coded events" },
         ].map((f) => (
           <div key={f.title} className="bg-card rounded-xl p-6 border border-border shadow-sm animate-fade-in">
