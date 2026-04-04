@@ -1,4 +1,4 @@
-# 🗓️ Tempo — Your Ultimate Smart Calendar
+# 📅 Tempo - Your Ultimate Smart Calendar
 
 Welcome to **Tempo**, a modern, high-performance calendar application built for users who value speed, clarity, and a seamless scheduling experience. 🚀
 
