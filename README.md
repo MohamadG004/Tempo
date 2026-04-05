@@ -1,39 +1,81 @@
-# 📅 Tempo - Your Ultimate Smart Calendar
+# 📅 Tempo - Smart Calendar App
 
-Welcome to **Tempo**, a modern, high-performance calendar application built for users who value speed, clarity, and a seamless scheduling experience. 🚀
+A modern, responsive calendar application designed to manage events efficiently with multiple views, recurring scheduling, and secure authentication.
 
----
+## 🔗 Live Demo
 
-## ✨ Key Features
+🌐 **Try the app:**
+https://tempocalendar.vercel.app/
 
-* **📅 Multiple Perspectives** – Switch instantly between **Day**, **Week**, and **Month** views to visualize your time exactly how you want it.
-* **➕ Effortless Event Management** – Create and edit events with a polished modal interface and distinct categorical badges.
-* **🧭 Intuitive Navigation** – Jump through dates using the **Mini Calendar** sidebar or quick-access header controls.
-* **🔒 Secure Authentication** – Robust sign-up and sign-in workflows powered by **Supabase**.
-* **📱 Mobile-First Design** – Fully responsive layout that looks stunning on desktops, tablets, and smartphones.
-* **🔔 At-a-Glance Dashboard** – A dedicated section for **Upcoming Events** so you never miss a beat.
+## ✨ Features
 
----
+* 📆 **Month, Week, and Day views**
+* 📝 **Create, edit, and delete events**
+* 🔁 **Recurring events** (daily, weekly, monthly, yearly)
+* 📍 **Mini calendar navigation**
+* 🔐 **User authentication** (Sign In / Sign Up)
+* 📱 **Fully responsive design**
+* 📌 **Upcoming events panel**
+* 🎨 **Clean modern UI**
 
 ## 🛠️ Tech Stack
 
-Tempo is built with a cutting-edge frontend stack for maximum developer velocity and app performance:
+* ⚛️ React
+* 🟦 TypeScript
+* ⚡ Vite
+* 🎨 Tailwind CSS
+* 🧩 Shadcn UI
+* 📅 Day.js
+* 🗄️ Supabase
+* 🧪 Vitest
+* 🎭 Playwright
 
-* **Core**: [React](https://reactjs.org/) + [TypeScript](https://www.typescriptlang.org/) + [Vite](https://vitejs.dev/)
-* **Styling**: [Tailwind CSS](https://tailwindcss.com/) & [Shadcn UI](https://ui.shadcn.com/)
-* **Date Logic**: [Day.js](https://day.js.org/)
-* **Backend & Auth**: [Supabase](https://supabase.com/)
-* **Testing**: [Vitest](https://vitest.dev/) & [Playwright](https://playwright.dev/)
+## 🚀 Getting Started
 
----
+Clone the repository and install dependencies:
 
-## 📂 Project Structure
+```bash
+git clone https://github.com/MohamadG004/Tempo.git
+cd Tempo
+npm install
+npm run dev
+```
+
+## 📦 Available Scripts
+
+```bash
+npm run dev        # Start development server
+npm run build      # Build for production
+npm run preview    # Preview production build
+npm run lint       # Run linter
+npm run test       # Run tests
+npm run test:watch # Run tests in watch mode
+```
+
+## 📁 Project Structure
 
 ```text
 src/
- ├── 🏗️ components/
- │    ├── calendar/    # Core logic (DayView, WeekView, MonthView)
- │    └── ui/          # Reusable Radix-based components
- ├── ⚓ hooks/         # use-calendar-store & responsive hooks
- ├── 📄 pages/         # CalendarPage, SignIn, and SignUp
- └── 🌐 services/      # Supabase API integration layer
+├── components/       # UI and calendar components
+├── contexts/         # Authentication logic
+├── hooks/            # Custom hooks
+├── pages/            # App pages
+├── services/         # API logic
+└── integrations/     # Supabase configuration
+```
+
+## 🌟 Highlights
+
+* Multi-view calendar system
+* Recurring event engine
+* Secure authentication flow
+* Responsive modern UI
+* Modular component-based architecture
+
+## 👤 Author
+
+**Mohamad Ghattas**
+
+---
+
+✨ Built to explore modern full-stack development and real-world calendar system design.
