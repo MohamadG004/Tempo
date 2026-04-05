@@ -60,7 +60,7 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="border-t border-border py-6 text-center text-xs text-muted-foreground">
-        &copy; {new Date().getFullYear()} Mohamad Ghattas.
+        &copy; {new Date().getFullYear()} Tempo
       </footer>
     </div>
   );
