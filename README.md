@@ -40,28 +40,6 @@ https://tempocalendar.vercel.app/
 * 🧪 Vitest
 * 🎭 Playwright
 
-## 🚀 Getting Started
-
-Clone the repository and install dependencies:
-
-```bash
-git clone https://github.com/MohamadG004/Tempo.git
-cd Tempo
-npm install
-npm run dev
-```
-
-## 📦 Available Scripts
-
-```bash
-npm run dev        # Start development server
-npm run build      # Build for production
-npm run preview    # Preview production build
-npm run lint       # Run linter
-npm run test       # Run tests
-npm run test:watch # Run tests in watch mode
-```
-
 ## 📁 Project Structure
 
 ```text
@@ -81,10 +59,6 @@ src/
 * Secure authentication flow
 * Responsive modern UI
 * Modular component-based architecture
-
-## 👤 Author
-
-**Mohamad Ghattas**
 
 ---
 
