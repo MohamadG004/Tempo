@@ -40,18 +40,6 @@ https://tempocalendar.vercel.app/
 * 🧪 Vitest
 * 🎭 Playwright
 
-## 📁 Project Structure
-
-```text
-src/
-├── components/       # UI and calendar components
-├── contexts/         # Authentication logic
-├── hooks/            # Custom hooks
-├── pages/            # App pages
-├── services/         # API logic
-└── integrations/     # Supabase configuration
-```
-
 ## 🌟 Highlights
 
 * Multi-view calendar system
