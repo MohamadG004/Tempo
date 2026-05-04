@@ -1,0 +1,53 @@
+# 📅 Tempo - Smart Calendar App
+
+A modern, responsive calendar application designed to manage events efficiently with multiple views, recurring scheduling, and secure authentication.
+
+## 🔗 Live Demo
+
+🌐 **Try the app:**
+https://tempocalendar.vercel.app/
+
+## ✨ Features
+
+* 📆 **Month, Week, and Day views**
+* 📝 **Create, edit, and delete events**
+* 🔁 **Recurring events** (daily, weekly, monthly, yearly)
+* 📍 **Mini calendar navigation**
+* 🔐 **User authentication** (Sign In / Sign Up)
+* 📱 **Fully responsive design**
+* 📌 **Upcoming events panel**
+* 🎨 **Clean modern UI**
+
+## 🛠️ Tech Stack
+
+![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
+![Shadcn UI](https://img.shields.io/badge/Shadcn_UI-000000?style=flat&logo=radix-ui&logoColor=white)
+![Day.js](https://img.shields.io/badge/Day.js-FF5F00?style=flat&logo=javascript&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat&logo=supabase&logoColor=white)
+![Vitest](https://img.shields.io/badge/Vitest-6E9F18?style=flat&logo=vitest&logoColor=white)
+![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=flat&logo=playwright&logoColor=white)
+
+* ⚛️ React
+* 🟦 TypeScript
+* ⚡ Vite
+* 🎨 Tailwind CSS
+* 🧩 Shadcn UI
+* 📅 Day.js
+* 🗄️ Supabase
+* 🧪 Vitest
+* 🎭 Playwright
+
+## 🌟 Highlights
+
+* Multi-view calendar system
+* Recurring event engine
+* Secure authentication flow
+* Responsive modern UI
+* Modular component-based architecture
+
+---
+
+✨ Built to explore modern full-stack development and real-world calendar system design.
